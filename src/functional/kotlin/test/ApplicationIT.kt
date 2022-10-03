@@ -1,10 +1,10 @@
-package cwf.whatsapp.reader.service
+package com.cwf.wa.reader.integration.service
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class CwfWhatsappReaderServiceApplicationTests {
+class ApplicationTest {
 
 	@Test
 	fun contextLoads() {

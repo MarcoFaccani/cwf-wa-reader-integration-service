@@ -1,11 +1,11 @@
-package cwf.whatsapp.reader.service
+package com.cwf.wa.reader.integration.service
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class CwfWhatsappReaderServiceApplication
+class Application
 
 fun main(args: Array<String>) {
-	runApplication<CwfWhatsappReaderServiceApplication>(*args)
+	runApplication<Application>(*args)
 }

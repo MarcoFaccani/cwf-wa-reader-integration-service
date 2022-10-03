@@ -20,7 +20,7 @@ data class Change(
 
 data class Value(
   val messaging_product: String,
-  val metadata: Metadata? = null,
+  var metadata: Metadata? = null,
   val contacts: List<Contact>? = null,
   val messages: List<InboundMessage>
 )

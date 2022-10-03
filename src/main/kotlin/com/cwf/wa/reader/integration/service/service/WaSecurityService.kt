@@ -32,7 +32,7 @@ class WaSecurityService(
 
   fun verifyToken(inputToken: String) {
     if (inputToken != verificationToken) {
-      log.info("Invalid verification token - message will be discarded")
+      log.error("Invalid verification token - message will be discarded")
       throw TokenNotValidException()
     }
   }

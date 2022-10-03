@@ -32,13 +32,13 @@ class WaController(
     @RequestHeader("X-Hub-Signature-256") signature256: String
   ): ResponseEntity<*> {
     val jsonRequest = objectMapper.writeValueAsString(request)
-    log.info("Message received: {}", jsonRequest)
+    log.debug("Message received: {}", jsonRequest)
 
     try {
       waSecurityService.verifySHA(signature256, jsonRequest)
       waReaderService.handleMessage(request)
     } catch (ex: Exception) {
-      log.error("ERROR while handling new message: {}", ex.message)
+      log.error("ERROR while handling new message. Error: {} - Message: {}", ex.message, request)
       return ResponseEntity.internalServerError().build<Any>()
     }
 

@@ -6,6 +6,7 @@ import com.cwf.wa.reader.integration.service.readFileAsObject
 import com.cwf.wa.reader.integration.service.service.WaReaderService
 import com.cwf.wa.reader.integration.service.service.WaSecurityService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -23,6 +24,7 @@ import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
 import org.springframework.restdocs.operation.preprocess.Preprocessors
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
@@ -111,7 +113,23 @@ internal class WaControllerTest(@Autowired val context: WebApplicationContext) {
   @Nested
   inner class VerifyTest {
 
-    //TODO: do tests
+    @Test
+    fun `happy path - response should be 200 and return the value of the param hub-challenge`() {
+      val challengeValue = "100"
+
+      val responseBody = mockMvc.perform(
+        get("/webhooks")
+          .param("hub.mode", "modeValue")
+          .param("hub.challenge", "100")
+          .param("hub.verify_token", "verifyTokenValue")
+      )
+        .andExpect(status().isOk)
+        .andReturn()
+        .response
+        .contentAsString
+
+      assertEquals(responseBody, challengeValue)
+    }
 
   }
 

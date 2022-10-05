@@ -48,8 +48,8 @@ class WaController(
 
   @GetMapping("/webhooks")
   fun verify(
-    @RequestParam("hub.mode") mode: String?,
-    @RequestParam("hub.challenge") challenge: Int?,
+    @RequestParam("hub.mode") mode: String,
+    @RequestParam("hub.challenge") challenge: Int,
     @RequestParam("hub.verify_token") verifyToken: String
   ): ResponseEntity<Int> {
     log.info("Verify request received with mode: {}, challenge: {}, verifyToken: {}", mode, challenge, verifyToken)

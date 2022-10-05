@@ -20,6 +20,15 @@ springdoc:
   swagger-ui:
     operationsSorter: method
 
+facebook:
+  wa:
+    secret: ${WA_SECRET}
+    verification-token: ${WA_VERIFICATION_TOKEN}
+  graph:
+    base-url: ${FACEBOOK_GRAPH_BASE_URL:https://graph.facebook.com}
+    version: ${FACEBOOK_GRAPH_VERSION:v13.0}
+    app-id: ${FACEBOOK_APP_ID:}
+    auth-token: ${FACEBOOK_GRAPH_AUTH_TOKEN:}
 
 
 

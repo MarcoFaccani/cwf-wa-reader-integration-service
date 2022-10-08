@@ -1,5 +1,5 @@
+import com.cwf.commonlibrary.model.HttpErrorResponse
 import com.cwf.wa.reader.integration.service.Application
-import com.cwf.wa.reader.integration.service.model.outbound.ResponseStatusErrorResponse
 import com.fasterxml.jackson.databind.JsonNode
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
@@ -68,8 +68,8 @@ internal class WaController_verifyIT(@LocalServerPort val serverPort: Int) {
         .build().encode().toUri()
 
       val requestEntity = RequestEntity<Any>(HttpMethod.GET, url)
-      val response: ResponseEntity<ResponseStatusErrorResponse> =
-        testRestTemplate.exchange(requestEntity, ResponseStatusErrorResponse::class.java)
+      val response: ResponseEntity<HttpErrorResponse> =
+        testRestTemplate.exchange(requestEntity, HttpErrorResponse::class.java)
 
       Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.statusCode)
       Assertions.assertEquals("Invalid verification token - message will be discarded", response.body!!.message)

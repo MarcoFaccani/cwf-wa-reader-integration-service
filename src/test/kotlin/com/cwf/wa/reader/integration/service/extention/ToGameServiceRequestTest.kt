@@ -1,8 +1,8 @@
 package com.cwf.wa.reader.integration.service.extention
 
-import com.cwf.commonlibrary.model.GameServiceRequest
-import com.cwf.commonlibrary.model.InboundMessage
-import com.cwf.commonlibrary.model.MessageType
+import com.cwf.wa.reader.integration.service.data.GameServiceRequestsTestData.Companion.buildExpectedGameServiceRequest_button
+import com.cwf.wa.reader.integration.service.data.GameServiceRequestsTestData.Companion.buildExpectedGameServiceRequest_list
+import com.cwf.wa.reader.integration.service.data.GameServiceRequestsTestData.Companion.buildExpectedGameServiceRequest_text
 import com.cwf.wa.reader.integration.service.model.exception.UnknownMessageTypeException
 import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
 import com.cwf.wa.reader.integration.service.readFileAsObject
@@ -69,31 +69,6 @@ internal class ToGameServiceRequestTest {
     }
   }
 
-  fun buildExpectedGameServiceRequest_text() = GameServiceRequest(
-    fullPhoneNumber = "393461285623",
-    playerName = "Marco",
-    message = InboundMessage(
-      type = MessageType.TEXT,
-      content = "Just a text"
-    )
-  )
 
-  fun buildExpectedGameServiceRequest_list() = GameServiceRequest(
-    fullPhoneNumber = "393461285623",
-    playerName = "Marco",
-    message = InboundMessage(
-      type = MessageType.LIST,
-      content = "Dummy Title"
-    )
-  )
-
-  fun buildExpectedGameServiceRequest_button() = GameServiceRequest(
-    fullPhoneNumber = "393461285623",
-    playerName = "Marco",
-    message = InboundMessage(
-      type = MessageType.BUTTON,
-      content = "Dummy Title"
-    )
-  )
 
 }

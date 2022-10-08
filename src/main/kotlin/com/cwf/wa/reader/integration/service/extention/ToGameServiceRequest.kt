@@ -3,6 +3,7 @@ package com.cwf.wa.reader.integration.service.extention
 import com.cwf.commonlibrary.model.GameServiceRequest
 import com.cwf.commonlibrary.model.InboundMessage
 import com.cwf.commonlibrary.model.MessageType
+import com.cwf.commonlibrary.model.wa.MarkMessageAsReadRequest
 import com.cwf.wa.reader.integration.service.model.exception.UnknownMessageTypeException
 import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
 
@@ -12,7 +13,7 @@ fun WaMessageRequest.toGameServiceRequest(): GameServiceRequest {
 
   return GameServiceRequest(
     fullPhoneNumber = getFullPhoneNumber(this),
-    playerName = extractPlayerName(this),
+    playerName = getPlayerName(this),
     message = InboundMessage(
       type = messageType,
       content = content
@@ -20,17 +21,18 @@ fun WaMessageRequest.toGameServiceRequest(): GameServiceRequest {
   )
 }
 
+fun WaMessageRequest.toMarkMessageAsReadRequest() = MarkMessageAsReadRequest(
+  messageId = getMessageId(this)
+)
+
+
+// Related utility methods
+
 fun getFullPhoneNumber(request: WaMessageRequest): String {
   return request.entry[0].changes[0].value.contacts[0].waId // waId is the phone number
-  /*
-    try {
-    } catch (e: Exception) {
-      throw CouldNotExtractFieldFromIncomingMessageException("Error extracting waId (phoneNumber) from incoming request: $request; Exception message: ${e.message}")
-    }
-   */
 }
 
-fun extractPlayerName(request: WaMessageRequest): String {
+fun getPlayerName(request: WaMessageRequest): String {
   return request.entry[0].changes[0].value.contacts[0].profile.name
 }
 
@@ -55,9 +57,7 @@ fun getMessageTypeAndContent(request: WaMessageRequest): Pair<MessageType, Strin
   }
 }
 
-/* catch (e: Exception) {
-    throw CouldNotExtractFieldFromIncomingMessageException("Error extracting messageType from incoming request: $request", e)
-  }
- */
-
+fun getMessageId(request: WaMessageRequest): String {
+  return request.entry[0].changes[0].value.messages[0].id
+}
 

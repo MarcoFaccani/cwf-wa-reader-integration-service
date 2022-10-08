@@ -8,6 +8,10 @@ server:
     include-stacktrace: never
 
 spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
   jackson:
     default-property-inclusion: non_null
     serialization:
@@ -29,6 +33,22 @@ facebook:
     version: ${FACEBOOK_GRAPH_VERSION:v13.0}
     app-id: ${FACEBOOK_APP_ID:}
     auth-token: ${FACEBOOK_GRAPH_AUTH_TOKEN:}
+
+feign:
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+http:
+  wa-writer:
+    url: ${WA_WRITER_URL:http://localhost:8089/wa-writer}
+  game-service:
+    url: ${GAME_SERVICE_URL:http://localhost:8090/game}
 
 
 

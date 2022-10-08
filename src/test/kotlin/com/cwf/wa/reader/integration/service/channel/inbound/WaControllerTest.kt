@@ -1,5 +1,6 @@
-package com.cwf.wa.reader.integration.service.controller
+package com.cwf.wa.reader.integration.service.channel.inbound
 
+import com.cwf.wa.reader.integration.service.channel.inbound.WaController
 import com.cwf.wa.reader.integration.service.model.exception.TokenNotValidException
 import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
 import com.cwf.wa.reader.integration.service.readFileAsObject

@@ -1,9 +1,9 @@
-package com.cwf.wa.reader.integration.service.model
+package com.cwf.wa.reader.integration.service.model.inbound
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
-data class InboundMessageRequest(
+data class WaMessageRequest(
   val `object`: String,
   val entry: List<Entry>
 )
@@ -21,7 +21,7 @@ data class Change(
 data class Value(
   val messaging_product: String,
   var metadata: Metadata? = null,
-  val contacts: List<Contact>? = null,
+  val contacts: List<Contact>, // used to be nullable
   val messages: List<InboundMessage>
 )
 
@@ -36,12 +36,12 @@ data class InboundMessage(
 )
 
 data class Contact(
-  val profile: Profile? = null,
-  @JsonProperty("wa_id") val waId: String? = null
+  val profile: Profile, // used to be nullable
+  @JsonProperty("wa_id") val waId: String  // used to be nullable
 )
 
 data class Profile(
-  val name: String? = null
+  val name: String // used to be nullable
 )
 
 data class MessageContext(

@@ -27,6 +27,8 @@
 		<spring.doc.openapi.version>1.6.11</spring.doc.openapi.version>
 		<maven-compiler-plugin.version>3.6.2</maven-compiler-plugin.version>
 		<jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
+
+		<common.library.version>0.0.1-SNAPSHOT</common.library.version>
 	</properties>
 
 	<dependencies>
@@ -68,6 +70,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency-->
+
+		<!-- Common Library -->
+		<dependency>
+			<groupId>com.cwf</groupId>
+			<artifactId>common-library</artifactId>
+			<version>${common.library.version}</version>
+		</dependency>
 
 		<!-- Test -->
 		<dependency>
@@ -169,7 +178,7 @@
 				<configuration>
 					<excludes>
 						<exclude>**/config/*</exclude>
-						<exclude>com/cwf/customer/Application*</exclude>
+						<exclude>com/cwf/wa/reader/integration/service/Application.kt</exclude>
 					</excludes>
 				</configuration>
 				<executions>

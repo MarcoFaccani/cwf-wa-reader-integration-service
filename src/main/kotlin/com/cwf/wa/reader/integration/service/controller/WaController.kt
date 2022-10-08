@@ -1,6 +1,6 @@
 package com.cwf.wa.reader.integration.service.controller
 
-import com.cwf.wa.reader.integration.service.model.InboundMessageRequest
+import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
 import com.cwf.wa.reader.integration.service.service.WaReaderService
 import com.cwf.wa.reader.integration.service.service.WaSecurityService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -27,7 +27,7 @@ class WaController(
   @PostMapping("/webhooks")
   @SneakyThrows
   fun handleMessage(
-    @RequestBody request: InboundMessageRequest,
+    @RequestBody request: WaMessageRequest,
     @RequestHeader("X-Hub-Signature") signature1: String,
     @RequestHeader("X-Hub-Signature-256") signature256: String
   ): ResponseEntity<*> {
@@ -39,7 +39,7 @@ class WaController(
       waReaderService.handleMessage(request)
     } catch (ex: Exception) {
       log.error("ERROR while handling new message. Error: {} - Message: {}", ex.message, request)
-      return ResponseEntity.internalServerError().build<Any>()
+      return ResponseEntity.internalServerError().body(ex.message)
     }
 
     return ResponseEntity.ok().build<Any>()

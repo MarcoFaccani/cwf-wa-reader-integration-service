@@ -1,6 +1,6 @@
 package com.cwf.wa.reader.integration.service.service
 
-import com.cwf.wa.reader.integration.service.model.InboundMessageRequest
+import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
 import org.apache.logging.log4j.LogManager
 import org.springframework.stereotype.Service
 
@@ -12,7 +12,7 @@ class WaReaderService {
     val log = LogManager.getLogger()
   }
 
-  fun handleMessage(request: InboundMessageRequest) {
+  fun handleMessage(request: WaMessageRequest) {
 
   }
 

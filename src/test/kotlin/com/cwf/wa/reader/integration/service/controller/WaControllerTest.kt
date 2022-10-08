@@ -1,7 +1,7 @@
 package com.cwf.wa.reader.integration.service.controller
 
-import com.cwf.wa.reader.integration.service.model.InboundMessageRequest
 import com.cwf.wa.reader.integration.service.model.exception.TokenNotValidException
+import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
 import com.cwf.wa.reader.integration.service.readFileAsObject
 import com.cwf.wa.reader.integration.service.service.WaReaderService
 import com.cwf.wa.reader.integration.service.service.WaSecurityService
@@ -64,7 +64,7 @@ internal class WaControllerTest(@Autowired val context: WebApplicationContext) {
   @Nested
   inner class HandleMessageTest {
 
-    lateinit var request: InboundMessageRequest
+    lateinit var request: WaMessageRequest
     lateinit var requestAsString: String
 
     val signature256 = "xHubSignature256DummyValue"

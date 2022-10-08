@@ -1,6 +1,6 @@
 package com.cwf.wa.reader.integration.service.jackson
 
-import com.cwf.wa.reader.integration.service.model.InboundMessageRequest
+import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
 import com.cwf.wa.reader.integration.service.readFileAsObject
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.assertj.core.api.Assertions.assertThat
@@ -15,12 +15,12 @@ import org.springframework.boot.test.json.JacksonTester
 
 @JsonTest
 internal class JsonRequestToModelTest(
-  @Autowired val jacksonTester: JacksonTester<InboundMessageRequest>
+  @Autowired val jacksonTester: JacksonTester<WaMessageRequest>
 ) {
 
   val objectMapper = jacksonObjectMapper()
 
-  lateinit var request: InboundMessageRequest
+  lateinit var request: WaMessageRequest
 
   @Nested
   inner class TextMessageTest {

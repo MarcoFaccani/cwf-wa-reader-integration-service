@@ -45,7 +45,7 @@ internal class WaControllerIT(@LocalServerPort val serverPort: Int) {
 
 	@BeforeEach
 	fun setup() {
-		baseUrl = "http://localhost:${serverPort}"
+		baseUrl = "http://localhost:${serverPort}/wa/reader"
 	}
 
 	companion object {
@@ -53,8 +53,8 @@ internal class WaControllerIT(@LocalServerPort val serverPort: Int) {
 		private lateinit var gameMockWebServer: MockWebServer
 		private lateinit var waWriterMockWebServer: MockWebServer
 
-		private const val GAME_REQUEST_PATH = "/game/message"
-		private const val WA_WRITER_REQUEST_PATH = "/game/message"
+		private const val GAME_REQUEST_PATH = "/message"
+		private const val WA_WRITER_REQUEST_PATH = "/send"
 
 		@JvmStatic
 		@BeforeAll
@@ -130,7 +130,6 @@ internal class WaControllerIT(@LocalServerPort val serverPort: Int) {
 		@ExtendWith(OutputCaptureExtension::class)
 		fun `unhappy path - response from wa-writer-service is 500`(logCapturer: CapturedOutput) {
 			val errorMessage = "an error message"
-			gameMockWebServer.enqueue(MockResponse().setResponseCode(200))
 			waWriterMockWebServer.enqueue(MockResponse().setResponseCode(500).setBody("""{ "message": "$errorMessage" }"""))
 
 			val requestBody = readFileAsString("json/request/text-message.json")

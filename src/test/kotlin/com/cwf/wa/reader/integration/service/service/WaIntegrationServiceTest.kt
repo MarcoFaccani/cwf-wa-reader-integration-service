@@ -16,7 +16,7 @@ import org.mockito.kotlin.then
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
-internal class WaReaderServiceTest {
+internal class WaIntegrationServiceTest {
 
   @Mock
   lateinit var gameClient: GameClient
@@ -25,7 +25,7 @@ internal class WaReaderServiceTest {
   lateinit var waWriterClient: WaWriterClient
 
   @InjectMocks
-  lateinit var underTest: WaReaderService
+  lateinit var underTest: WaIntegrationService
 
   lateinit var waMessageRequest: WaMessageRequest
 

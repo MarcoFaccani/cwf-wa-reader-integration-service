@@ -37,7 +37,7 @@ internal class WaController_verifyIT(@LocalServerPort val serverPort: Int) {
 
   @BeforeEach
   fun setup() {
-    baseUrl = "http://localhost:${serverPort}"
+    baseUrl = "http://localhost:${serverPort}/wa/reader"
   }
 
   @Nested

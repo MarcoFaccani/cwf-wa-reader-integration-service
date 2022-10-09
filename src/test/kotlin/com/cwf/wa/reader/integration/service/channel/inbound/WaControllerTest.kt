@@ -1,10 +1,9 @@
 package com.cwf.wa.reader.integration.service.channel.inbound
 
-import com.cwf.wa.reader.integration.service.channel.inbound.WaController
 import com.cwf.wa.reader.integration.service.model.exception.TokenNotValidException
 import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
 import com.cwf.wa.reader.integration.service.readFileAsObject
-import com.cwf.wa.reader.integration.service.service.WaReaderService
+import com.cwf.wa.reader.integration.service.service.WaIntegrationService
 import com.cwf.wa.reader.integration.service.service.WaSecurityService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -42,10 +41,12 @@ internal class WaControllerTest(@Autowired val context: WebApplicationContext) {
   private val objMapper = jacksonObjectMapper()
 
   @MockBean
-  lateinit var waReaderService: WaReaderService
+  lateinit var waIntegrationService: WaIntegrationService
 
   @MockBean
   lateinit var waSecurityService: WaSecurityService
+
+  val baseUrl = "/wa/reader"
 
   @BeforeEach
   fun setUp(restDocumentation: RestDocumentationContextProvider?) {
@@ -81,7 +82,7 @@ internal class WaControllerTest(@Autowired val context: WebApplicationContext) {
       requestAsString = objMapper.writeValueAsString(request)
 
       mockMvc.perform(
-        post("/webhooks")
+        post("$baseUrl/webhooks")
           .content(requestAsString)
           .header("X-Hub-Signature", "xHubSignatureDummyValue")
           .header("X-Hub-Signature-256", signature256)
@@ -90,7 +91,7 @@ internal class WaControllerTest(@Autowired val context: WebApplicationContext) {
         .andExpect(status().isOk)
 
       then(waSecurityService).should().verifySHA(signature256, requestAsString)
-      then(waReaderService).should().handleMessage(request)
+      then(waIntegrationService).should().handleMessage(request)
     }
 
     @Test
@@ -100,7 +101,7 @@ internal class WaControllerTest(@Autowired val context: WebApplicationContext) {
       given { waSecurityService.verifySHA(signature256, requestAsString) } willThrow { TokenNotValidException() }
 
       mockMvc.perform(
-        post("/webhooks")
+        post("$baseUrl/webhooks")
           .content(requestAsString)
           .header("X-Hub-Signature", "xHubSignatureDummyValue")
           .header("X-Hub-Signature-256", signature256)
@@ -119,7 +120,7 @@ internal class WaControllerTest(@Autowired val context: WebApplicationContext) {
       val challengeValue = "100"
 
       val responseBody = mockMvc.perform(
-        get("/webhooks")
+        get("$baseUrl/webhooks")
           .param("hub.mode", "modeValue")
           .param("hub.challenge", "100")
           .param("hub.verify_token", "verifyTokenValue")

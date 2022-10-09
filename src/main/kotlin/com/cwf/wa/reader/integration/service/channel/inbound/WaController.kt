@@ -1,7 +1,7 @@
 package com.cwf.wa.reader.integration.service.channel.inbound
 
 import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
-import com.cwf.wa.reader.integration.service.service.WaReaderService
+import com.cwf.wa.reader.integration.service.service.WaIntegrationService
 import com.cwf.wa.reader.integration.service.service.WaSecurityService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import lombok.SneakyThrows
@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*
 
 @Log4j2
 @RestController
+@RequestMapping("/wa/reader")
 class WaController(
-  private val waReaderService: WaReaderService,
+  private val waIntegrationService: WaIntegrationService,
   private val waSecurityService: WaSecurityService
 ) {
 
@@ -36,7 +37,7 @@ class WaController(
 
     try {
       waSecurityService.verifySHA(signature256, jsonRequest)
-      waReaderService.handleMessage(request)
+      waIntegrationService.handleMessage(request)
     } catch (ex: Exception) {
       log.error("ERROR while handling new message. Error: {} - Message: {}", ex.message, request)
       return ResponseEntity.internalServerError().body(ex.message)

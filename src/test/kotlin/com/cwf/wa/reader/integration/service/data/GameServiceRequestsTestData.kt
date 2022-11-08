@@ -1,9 +1,10 @@
 package com.cwf.wa.reader.integration.service.data
 
-import com.cwf.commonlibrary.model.GameServiceRequest
-import com.cwf.commonlibrary.model.InboundMessage
 import com.cwf.commonlibrary.model.MessageType
 import com.cwf.commonlibrary.model.wa.MarkMessageAsReadRequest
+import com.cwf.commonlibrary.request.GameServiceRequest
+import com.cwf.commonlibrary.request.InboundMessage
+
 
 class GameServiceRequestsTestData {
 

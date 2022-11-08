@@ -1,9 +1,9 @@
 package com.cwf.wa.reader.integration.service.extention
 
-import com.cwf.commonlibrary.model.GameServiceRequest
-import com.cwf.commonlibrary.model.InboundMessage
 import com.cwf.commonlibrary.model.MessageType
 import com.cwf.commonlibrary.model.wa.MarkMessageAsReadRequest
+import com.cwf.commonlibrary.request.GameServiceRequest
+import com.cwf.commonlibrary.request.InboundMessage
 import com.cwf.wa.reader.integration.service.model.exception.UnknownMessageTypeException
 import com.cwf.wa.reader.integration.service.model.inbound.WaMessageRequest
 

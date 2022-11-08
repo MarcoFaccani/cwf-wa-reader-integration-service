@@ -1,6 +1,6 @@
 package com.cwf.wa.reader.integration.service.channel.outbound
 
-import com.cwf.commonlibrary.model.GameServiceRequest
+import com.cwf.commonlibrary.request.GameServiceRequest
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

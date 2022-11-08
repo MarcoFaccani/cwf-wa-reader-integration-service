@@ -14,6 +14,8 @@
 	<artifactId>cwf-wa-reader-integration-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cwf-wa-reader-integration-service</name>
+	<packaging>jar</packaging>
+
 
 	<properties>
 		<argLine>-Duser.language=en</argLine>
@@ -91,7 +93,7 @@
 
 		<!-- Common Library -->
 		<dependency>
-			<groupId>com.cwf</groupId>
+			<groupId>cwf</groupId>
 			<artifactId>common-library</artifactId>
 			<version>${common.library.version}</version>
 		</dependency>

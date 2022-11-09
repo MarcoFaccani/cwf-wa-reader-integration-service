@@ -36,7 +36,7 @@ class WaController(
     log.debug("Message received: {}", jsonRequest)
 
     try {
-      waSecurityService.verifySHA(signature256, jsonRequest)
+      //TODO: waSecurityService.verifySHA(signature256, jsonRequest)
       waIntegrationService.handleMessage(request)
     } catch (ex: Exception) {
       log.error("ERROR while handling new message. Error: {} - Message: {}", ex.message, request)

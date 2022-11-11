@@ -27,7 +27,12 @@ class WaIntegrationService(
       log.warn("error marking message as read. Error message: ${ex.message}")
     }
 
-    gameClient.forwardMessage(request.toGameServiceRequest())
+    try {
+      val response = gameClient.forwardMessage(request.toGameServiceRequest())
+      log.info("GameService response: $response")
+    } catch (ex: Exception) {
+      log.error("error forwarding message to game-service. Error message: ${ex.message}")
+    }
   }
 
 }

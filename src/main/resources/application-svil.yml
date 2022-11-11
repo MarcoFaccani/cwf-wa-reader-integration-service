@@ -8,6 +8,8 @@ server:
     include-stacktrace: never
 
 spring:
+  application:
+    name: wa-reader-integration-service
   cloud:
     loadbalancer:
       ribbon:

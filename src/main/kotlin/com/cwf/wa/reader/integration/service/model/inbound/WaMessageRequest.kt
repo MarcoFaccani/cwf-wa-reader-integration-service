@@ -21,7 +21,7 @@ data class Change(
 data class Value(
   val messaging_product: String,
   var metadata: Metadata? = null,
-  val contacts: List<Contact>, // used to be nullable
+  val contacts: List<Contact>?,
   val messages: List<InboundMessage>
 )
 

@@ -21,17 +21,29 @@ class WaIntegrationService(
   }
 
   fun handleMessage(request: WaMessageRequest) {
-    try {
-      waWriterClient.markMessageAsRead(request.toMarkMessageAsReadRequest())
-    } catch (ex: Exception) {
-      log.warn("error marking message as read. Error message: ${ex.message}")
+    markMessageAsReadOnWA(request)
+
+    if (request.entry[0].changes[0].value.contacts == null) {
+      log.debug("Received webhook from WA - message won't be forwarded to GameService. Request: $request")
     }
 
+    sendMessageToGameService(request)
+  }
+
+  private fun sendMessageToGameService(request: WaMessageRequest) {
     try {
       val response = gameClient.forwardMessage(request.toGameServiceRequest())
       log.info("GameService response: $response")
     } catch (ex: Exception) {
       log.error("error forwarding message to game-service. Error message: ${ex.message}")
+    }
+  }
+
+  private fun markMessageAsReadOnWA(request: WaMessageRequest) {
+    try {
+      waWriterClient.markMessageAsRead(request.toMarkMessageAsReadRequest())
+    } catch (ex: Exception) {
+      log.warn("error marking message as read. Error message: ${ex.message}")
     }
   }
 

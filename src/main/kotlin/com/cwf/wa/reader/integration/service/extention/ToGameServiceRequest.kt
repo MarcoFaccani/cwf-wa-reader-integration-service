@@ -29,11 +29,11 @@ fun WaMessageRequest.toMarkMessageAsReadRequest() = MarkMessageAsReadRequest(
 // Related utility methods
 
 fun getFullPhoneNumber(request: WaMessageRequest): String {
-  return request.entry[0].changes[0].value.contacts[0].waId // waId is the phone number
+  return request.entry[0].changes[0].value.contacts!![0].waId // waId is the phone number
 }
 
 fun getPlayerName(request: WaMessageRequest): String {
-  return request.entry[0].changes[0].value.contacts[0].profile.name
+  return request.entry[0].changes[0].value.contacts!![0].profile.name
 }
 
 fun getMessageTypeAndContent(request: WaMessageRequest): Pair<MessageType, String> {

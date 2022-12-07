@@ -22,7 +22,7 @@ data class Value(
   val messaging_product: String,
   var metadata: Metadata? = null,
   val contacts: List<Contact>?,
-  val messages: List<InboundMessage>
+  val messages: List<InboundMessage>?
 )
 
 data class InboundMessage(

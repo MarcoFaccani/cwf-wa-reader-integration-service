@@ -76,7 +76,7 @@ internal class JsonRequestToModelTest(
       assertNotNull(messages)
       assertThat(messages).hasSize(1)
 
-      val message = messages[0]
+      val message = messages!![0]
       assertEquals("393461285623", message.from)
       assertEquals("wamid.HBgMMzkzNDYxMjg1NjIzFQIAEhgUM0VCMDE3NzNGRUI2RkE0NEYwODcA", message.id)
       assertEquals("1659647929", message.timestamp)
@@ -85,7 +85,7 @@ internal class JsonRequestToModelTest(
 
     @Test
     fun `should map Text to InboundMessageRequest`() {
-      val text = request.entry[0].changes[0].value.messages[0].text
+      val text = request.entry[0].changes[0].value.messages!![0].text
       assertNotNull(text)
       assertEquals("Just a text", text!!.body)
     }
@@ -101,7 +101,7 @@ internal class JsonRequestToModelTest(
 
     @Test
     fun `should map Interactive List object to InboundMessageRequest`() {
-      val interactive = request.entry[0].changes[0].value.messages[0].interactive
+      val interactive = request.entry[0].changes[0].value.messages!![0].interactive
       assertNotNull(interactive)
       assertEquals("list_reply", interactive!!.type)
 
@@ -124,7 +124,7 @@ internal class JsonRequestToModelTest(
 
     @Test
     fun `should map Interactive Button object to InboundMessageRequest`() {
-      val interactive = request.entry[0].changes[0].value.messages[0].interactive
+      val interactive = request.entry[0].changes[0].value.messages!![0].interactive
       assertNotNull(interactive)
       assertEquals("button_reply", interactive!!.type)
 

@@ -37,7 +37,7 @@ fun getPlayerName(request: WaMessageRequest): String {
 }
 
 fun getMessageTypeAndContent(request: WaMessageRequest): Pair<MessageType, String> {
-  val message = request.entry[0].changes[0].value.messages[0]
+  val message = request.entry[0].changes[0].value.messages!![0]
 
   return when (message.type) {
     "text" -> Pair(MessageType.TEXT, message.text!!.body!!)
@@ -58,6 +58,6 @@ fun getMessageTypeAndContent(request: WaMessageRequest): Pair<MessageType, Strin
 }
 
 fun getMessageId(request: WaMessageRequest): String {
-  return request.entry[0].changes[0].value.messages[0].id
+  return request.entry[0].changes[0].value.messages!![0].id
 }
 

@@ -23,7 +23,7 @@ class WaIntegrationService(
   fun handleMessage(request: WaMessageRequest) {
     markMessageAsReadOnWA(request)
 
-    if (request.entry[0].changes[0].value.contacts == null) {
+    if (request.entry[0].changes[0].value.contacts == null || request.entry[0].changes[0].value.messages == null) {
       log.debug("Received webhook from WA - message won't be forwarded to GameService. Request: $request")
     }
 
